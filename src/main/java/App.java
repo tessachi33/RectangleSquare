@@ -1,12 +1,10 @@
 
 import java.util.HashMap;
-
 import spark.ModelAndView;
-
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
 
-public class App{
+public class App {
   public static void main(String[] args) {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
@@ -25,6 +23,11 @@ public class App{
 
       Rectangle myRectangle = new Rectangle(length, width);
       model.put("myRectangle", myRectangle);
+
+      if (myRectangle.isSquare()) {
+        Cube myCube = new Cube(myRectangle);
+        model.put("myCube", myCube);
+      }
 
       model.put("template", "templates/rectangle.vtl");
       return new ModelAndView(model, layout);
